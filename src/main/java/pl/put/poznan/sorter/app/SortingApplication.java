@@ -1,13 +1,13 @@
-package pl.put.poznan.transformer.app;
+package pl.put.poznan.sorter.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication(scanBasePackages = {"pl.put.poznan.transformer.rest"})
-public class TextTransformerApplication {
+public class SortingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TextTransformerApplication.class, args);
+        SpringApplication.run(SortingApplication.class, args);
     }
 }
