@@ -1,19 +1,35 @@
-package pl.put.poznan.sorter.rest;
+package pl.put.poznan.sorter.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.sorter.logic.Sorting;
+import pl.put.poznan.sorter.enums.SortingMethodEnum;
+import pl.put.poznan.sorter.factory.SortingFactory;
 
-import java.util.Arrays;
+import java.util.List;
 
-
-@RestController
-@RequestMapping("/{text}")
+@Controller
+//@RequestMapping("/")
 public class SortingController {
-
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @Autowired
+    SortingFactory factory;
+
+    // (@RequestParam SortingTypeEnum sortingTypeEnum)
+    @PostMapping(value = "/sort")
+    public void sortWithMethod(@RequestParam String algorithm){
+        System.out.println(SortingMethodEnum.valueOf(algorithm));
+        // factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(List.of(1,4,3,4)); // TODO fix NullPointerException
+    }
+
+    @GetMapping("/")
+    public String chooseMethod(){
+        return "index";
+    }
+
+    /* @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public String get(@PathVariable String text,
                               @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
 
@@ -37,9 +53,7 @@ public class SortingController {
         // perform the transformation, you should run your logic here, below is just a silly example
         Sorting transformer = new Sorting(transforms);
         return transformer.transform(text);
-    }
-
-
+    }*/
 
 }
 

@@ -1,18 +1,25 @@
 package pl.put.poznan.sorter.logic;
 
+import pl.put.poznan.sorter.enums.SortingMethodEnum;
+
+import java.util.List;
+
 /**
  * This is just an example to show that the logic should be outside the REST service.
  */
-public class Sorting {
+public interface Sorting {
+    void sort(List<?> list);
 
-    private final String[] transforms;
+    SortingMethodEnum getSortingMethod();
+
+    /*private final String[] transforms;
 
     public Sorting(String[] transforms){
         this.transforms = transforms;
     }
 
     public String transform(String text){
-        // of course, normally it would do something based on the transforms
+        of course, normally it would do something based on the transforms
         return text.toUpperCase();
-    }
+    }*/
 }
