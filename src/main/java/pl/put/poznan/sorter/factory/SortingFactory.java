@@ -3,7 +3,7 @@ package pl.put.poznan.sorter.factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
-import pl.put.poznan.sorter.logic.Sorting;
+import pl.put.poznan.sorter.logic.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,10 @@ import java.util.Set;
 public class SortingFactory {
     Map<SortingMethodEnum, Sorting> map;
     @Autowired
-    public SortingFactory(Set<Sorting> sortingTypesSet){ // TODO fix set = null, ???
-        createStrategy(sortingTypesSet);
+    public SortingFactory(Set<Sorting> sortingTypesSet){ // TODO fix sortingTypesSet = null, ???
+        Set<Sorting> set = Set.of(new BubbleSort(), new QuickSort(), new ShellSort(), new InsertionSort(), new HeapSort());
+        // createStrategy(sortingTypesSet);
+        createStrategy(set);
     }
 
     private void createStrategy(Set<Sorting> sortingTypesSet) {

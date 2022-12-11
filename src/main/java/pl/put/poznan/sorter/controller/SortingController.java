@@ -20,8 +20,7 @@ public class SortingController {
     // (@RequestParam SortingTypeEnum sortingTypeEnum)
     @PostMapping(value = "/sort")
     public void sortWithMethod(@RequestParam String algorithm){
-        System.out.println(SortingMethodEnum.valueOf(algorithm));
-        // factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(List.of(1,4,3,4)); // TODO fix NullPointerException
+        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(List.of(1,4,3,2,6,8,7,5));
     }
 
     @GetMapping("/")

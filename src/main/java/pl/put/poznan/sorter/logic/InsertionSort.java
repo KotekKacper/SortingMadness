@@ -4,12 +4,13 @@ import org.springframework.stereotype.Service;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InsertionSort implements Sorting{
     @Override
     public void sort(List<?> list) {
-        System.out.println("Insertion!");
+        System.out.println("Insertion! " + list.stream().sorted().collect(Collectors.toList()));
     }
 
     @Override
