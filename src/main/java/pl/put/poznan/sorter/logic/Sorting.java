@@ -2,13 +2,13 @@ package pl.put.poznan.sorter.logic;
 
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is just an example to show that the logic should be outside the REST service.
  */
 public interface Sorting {
-    void sort(List<?> list);
+    <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc);
 
     SortingMethodEnum getSortingMethod();
 

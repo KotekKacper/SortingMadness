@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@ComponentScan(basePackages = {"pl.put.poznan.sorter.controller", "pl.put.poznan.sorter.factory"})
+@ComponentScan(basePackages = {"pl.put.poznan.sorter.rest", "pl.put.poznan.sorter.factory"})
 @SpringBootApplication
 public class SortingApplication {
 

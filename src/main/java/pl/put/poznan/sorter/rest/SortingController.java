@@ -1,4 +1,4 @@
-package pl.put.poznan.sorter.controller;
+package pl.put.poznan.sorter.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 import pl.put.poznan.sorter.factory.SortingFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,7 +21,8 @@ public class SortingController {
     // (@RequestParam SortingTypeEnum sortingTypeEnum)
     @PostMapping(value = "/sort")
     public void sortWithMethod(@RequestParam String algorithm){
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(List.of(1,4,3,2,6,8,7,5));
+        ArrayList<Integer> arr = new ArrayList<>(List.of(1,4,3,2,6,8,7,5));
+        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(arr, true);
     }
 
     @GetMapping("/")
