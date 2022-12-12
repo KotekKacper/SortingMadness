@@ -21,8 +21,9 @@ public class SortingController {
     // (@RequestParam SortingTypeEnum sortingTypeEnum)
     @PostMapping(value = "/sort")
     public void sortWithMethod(@RequestParam String algorithm){
-        ArrayList<Integer> arr = new ArrayList<>(List.of(1,4,3,2,6,8,7,5));
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(arr, true);
+        ArrayList<String> strArr = new ArrayList<>(List.of("a", "x", "z", "b", "o"));
+        //ArrayList<Integer> intArr = new ArrayList<>(List.of(-1, 5, 1, 0, 11));
+        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(strArr, false);
     }
 
     @GetMapping("/")

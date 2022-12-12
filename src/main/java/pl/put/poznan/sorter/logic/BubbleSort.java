@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 @Service
