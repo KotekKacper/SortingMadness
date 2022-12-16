@@ -16,7 +16,7 @@ public class SortingFactory {
     Map<SortingMethodEnum, Sorting> map;
     @Autowired
     public SortingFactory(Set<Sorting> sortingTypesSet){ // TODO fix sortingTypesSet = null, ???
-        Set<Sorting> set = Set.of(new BubbleSort(), new QuickSort(), new ShellSort(), new InsertionSort(), new HeapSort());
+        Set<Sorting> set = Set.of(new BubbleSort(), new QuickSort(), new ShellSort(), new InsertionSort(), new HeapSort(), new SelectionSort());
         // createStrategy(sortingTypesSet);
         createStrategy(set);
     }

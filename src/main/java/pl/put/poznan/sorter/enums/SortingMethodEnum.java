@@ -5,5 +5,6 @@ public enum SortingMethodEnum {
     INSERTION,
     SHELL,
     QUICK,
-    HEAP
+    HEAP,
+    SELECTION
 }
