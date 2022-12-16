@@ -22,7 +22,7 @@ public class SortingController {
     @PostMapping(value = "/sort")
     public void sortWithMethod(@RequestParam String algorithm){
         ArrayList<String> strArr = new ArrayList<>(List.of("a", "k", "z", "b", "o", "m", "h"));
-        ArrayList<Integer> intArr = new ArrayList<>(List.of(-1, 5, 1, 0, 11, -7, 6, 8, 2, 3, 1));
+        ArrayList<Integer> intArr = new ArrayList<>(List.of(-1, 5, 1, 12, 0, 11, -7, 6, 8, 2, 3, 1));
         factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(strArr, true);
         factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(strArr, false);
         factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(intArr, true);
