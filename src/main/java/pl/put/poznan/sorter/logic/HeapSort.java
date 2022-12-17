@@ -4,13 +4,13 @@ import org.springframework.stereotype.Service;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 @Service
 public class HeapSort implements Sorting{
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
-        System.out.println("Heap! " + arr.stream().sorted().collect(Collectors.toList()));
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
+        System.out.print("Heap! ");
+        return arr;
     }
 
     @Override

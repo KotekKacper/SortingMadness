@@ -7,11 +7,10 @@ import java.util.Collections;
 
 public class SelectionSort implements Sorting{
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
         int minimum;
         int size = arr.size();
         System.out.print("Selection! ");
-
         for (int i = 0; i < size; i++){
             minimum = i;
             for (int j = i; j < size; j++){
@@ -22,7 +21,7 @@ public class SelectionSort implements Sorting{
             }
             Collections.swap(arr, minimum, i);
         }
-        System.out.println(arr);
+        return arr;
     }
 
     @Override

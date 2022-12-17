@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * This is just an example to show that the logic should be outside the REST service.
  */
 public interface Sorting {
-    <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc);
+    <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc);
 
     SortingMethodEnum getSortingMethod();
 

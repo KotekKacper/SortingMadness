@@ -11,10 +11,11 @@ public class ShellSort implements Sorting{
     // Insertion sort on sublist of every n-th element (e.g. second)
     // Moving elements that are far from where they should be is more effective
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
         System.out.print("Shell! ");
         int size = arr.size();
-        int gap = 1; // Using knuth gap sequence
+        // Using knuth gap sequence
+        int gap = 1;
         while (gap < size / 3){
             gap = 3 * gap + 1;
         }
@@ -28,7 +29,7 @@ public class ShellSort implements Sorting{
             }
             gap /= 3;
         }
-        System.out.println(arr);
+        return arr;
     }
 
     @Override

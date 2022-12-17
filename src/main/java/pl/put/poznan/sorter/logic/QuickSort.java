@@ -9,10 +9,10 @@ import java.util.Collections;
 @Service
 public class QuickSort implements Sorting{
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
         System.out.print("Quick! ");
         quick(arr, 0, arr.size() - 1, asc);
-        System.out.println(arr);
+        return arr;
     }
 
     public <T extends Comparable<T>> void quick(ArrayList<T> arr, int begin, int end, boolean asc) {

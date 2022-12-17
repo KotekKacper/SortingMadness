@@ -8,9 +8,8 @@ import java.util.Collections;
 
 @Service
 public class BubbleSort implements Sorting{
-
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
         int size = arr.size();
         System.out.print("Bubble! ");
         for (int i = 0; i < size-1; i++){
@@ -20,7 +19,7 @@ public class BubbleSort implements Sorting{
                 }
             }
         }
-        System.out.println(arr);
+        return arr;
     }
 
     @Override

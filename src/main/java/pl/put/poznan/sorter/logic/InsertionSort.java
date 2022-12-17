@@ -4,12 +4,11 @@ import org.springframework.stereotype.Service;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 @Service
 public class InsertionSort implements Sorting{
     @Override
-    public <T extends Comparable<T>> void sort(ArrayList<T> arr, boolean asc) {
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
         int size = arr.size();
         System.out.print("Insertion! ");
         for (int i = 1; i < size; i++){
@@ -21,7 +20,7 @@ public class InsertionSort implements Sorting{
             }
             arr.set(j+1, key);
         }
-        System.out.println(arr);
+        return arr;
     }
 
     @Override

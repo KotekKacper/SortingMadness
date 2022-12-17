@@ -6,27 +6,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 import pl.put.poznan.sorter.factory.SortingFactory;
+import pl.put.poznan.sorter.logic.MyTimer;
+import pl.put.poznan.sorter.logic.RandomIntArrayList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 //@RequestMapping("/")
 public class SortingController {
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
-
+    private final MyTimer timer = new MyTimer();
+    ArrayList<Integer> intArr;
     @Autowired
     SortingFactory factory;
 
     // (@RequestParam SortingTypeEnum sortingTypeEnum)
     @PostMapping(value = "/sort")
     public void sortWithMethod(@RequestParam String algorithm){
-        ArrayList<String> strArr = new ArrayList<>(List.of("a", "k", "z", "b", "o", "m", "h"));
-        ArrayList<Integer> intArr = new ArrayList<>(List.of(-1, 5, 1, 12, 0, 11, -7, 6, 8, 2, 3, 1));
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(strArr, true);
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(strArr, false);
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(intArr, true);
-        factory.findSortingType(SortingMethodEnum.valueOf(algorithm)).sort(intArr, false);
+        String[] algorithms = algorithm.split(",");
+        for (String alg : algorithms){
+            intArr = (new RandomIntArrayList(10000)).getRandomList();
+            timer.go();
+            intArr = factory.findSortingType(SortingMethodEnum.valueOf(alg)).sort(intArr, true);
+            timer.stop();
+            System.out.println(timer.getTimeMilli() + "ms");
+        }
     }
 
     @GetMapping("/")
