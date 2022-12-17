@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
-import pl.put.poznan.sorter.factory.SortingFactory;
 import pl.put.poznan.sorter.logic.MyTimer;
 import pl.put.poznan.sorter.logic.RandomIntArrayList;
 import pl.put.poznan.sorter.logic.SortingStrategy;
@@ -21,7 +20,7 @@ import java.util.Map;
 @RestController
 public class SortingController {
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
-    public <T extends Comparable<T>> SortResponse<T> sort(@RequestBody SortRequest<T> request) throws ExecutionControl.NotImplementedException {
+    public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
         SortingMethodEnum strategy = SortingMethodEnum.valueOf(request.alghoritm);
         SortingStrategy sorting = new SortingStrategy(strategy);
 
