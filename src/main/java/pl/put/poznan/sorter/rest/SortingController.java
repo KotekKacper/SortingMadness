@@ -13,12 +13,11 @@ public class SortingController {
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
     public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
         logger.debug("Sort request: " + request);
-        // System.out.println(request.algorithm + request.array.toString());
         SortingMethodEnum strategy = SortingMethodEnum.valueOf(request.algorithm);
         SortingStrategy sorting = new SortingStrategy(strategy);
 
         SortResponse<T> result = new SortResponse<T>();
-        result.result = sorting.sort(request.array, request.ascending);
+        result.result = sorting.sort(request.array, request.ascending, request.maxIterations);
         result.executionTime = sorting.getExecutionTime();
         logger.debug("Sort result: " + result);
         return result;

@@ -9,13 +9,14 @@ import java.util.Collections;
 @Service
 public class QuickSort implements Sorting{
     @Override
-    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc) {
-        System.out.print("Quick! ");
-        quick(arr, 0, arr.size() - 1, asc);
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations) {
+        if (maxIterations <= 0) maxIterations = Integer.MAX_VALUE;
+        quick(arr, 0, arr.size() - 1, asc, maxIterations);
         return arr;
     }
 
-    public <T extends Comparable<T>> void quick(ArrayList<T> arr, int begin, int end, boolean asc) {
+    public <T extends Comparable<T>> void quick(ArrayList<T> arr, int begin, int end, boolean asc, int iterations) {
+        if (iterations == 0) return;
         int i = begin, j = end;
         T pivot = arr.get(begin + (end - begin) / 2);
         while (i <= j){
@@ -28,9 +29,9 @@ public class QuickSort implements Sorting{
             }
             if (i <= j) Collections.swap(arr, i++, j--);
         }
-        if (i < end) quick(arr, i, end, asc);
-        if (begin < j) quick(arr, begin, j, asc);
-    };
+        if (i < end) quick(arr, i, end, asc, --iterations);
+        if (begin < j) quick(arr, begin, j, asc, --iterations);
+    }
 
     @Override
     public SortingMethodEnum getSortingMethod() {
