@@ -12,6 +12,7 @@ import pl.put.poznan.sorter.logic.SortingStrategy;
 public class SortingController {
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
     public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
+        logger.debug("Sort request: " + request);
         // System.out.println(request.algorithm + request.array.toString());
         SortingMethodEnum strategy = SortingMethodEnum.valueOf(request.algorithm);
         SortingStrategy sorting = new SortingStrategy(strategy);
@@ -19,12 +20,13 @@ public class SortingController {
         SortResponse<T> result = new SortResponse<T>();
         result.result = sorting.sort(request.array, request.ascending);
         result.executionTime = sorting.getExecutionTime();
-
+        logger.debug("Sort result: " + result);
         return result;
     }
 
     @PostMapping(value = "/sortStrings", consumes = "application/json", produces = "application/json")
     public SortResponse<String> sortStrings(@RequestBody SortRequest<String> request){
+        logger.info("Called endpoint /sortStrings");
         try {
             return sort(request);
         } catch (ExecutionControl.NotImplementedException e) {
