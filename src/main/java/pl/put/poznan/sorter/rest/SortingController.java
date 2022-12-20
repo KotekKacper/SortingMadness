@@ -41,6 +41,28 @@ public class SortingController {
             return null;
         }
     }
+
+    @PostMapping(value = "/sortInts", consumes = "application/json", produces = "application/json")
+    public SortResponse<Integer> sortInts(@RequestBody SortRequest<Integer> request){
+        try {
+            return sort(request);
+        } catch (ExecutionControl.NotImplementedException e) {
+            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //TODO: handle bad request response code
+            return null;
+        }
+    }
+
+    @PostMapping(value = "/sortFloats", consumes = "application/json", produces = "application/json")
+    public SortResponse<Float> sortFloats(@RequestBody SortRequest<Float> request){
+        try {
+            return sort(request);
+        } catch (ExecutionControl.NotImplementedException e) {
+            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //TODO: handle bad request response code
+            return null;
+        }
+    }
 }
 
 
