@@ -6,8 +6,19 @@ import pl.put.poznan.sorter.enums.SortingMethodEnum;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Class that represents a heap sort algorithm
+ */
 @Service
 public class HeapSort implements Sorting{
+    /**
+     * Sorts an array using heap sort algorithm
+     * @param arr Array to sort
+     * @param asc Sorting direction
+     * @param maxIterations Maximum number of iterations
+     * @param <T> Type of elements in array
+     * @return Sorted array
+     */
     @Override
     public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations) {
         int size = arr.size();
@@ -24,6 +35,14 @@ public class HeapSort implements Sorting{
         return arr;
     }
 
+    /**
+     * Builds a heap on a list
+     * @param arr Array to sort
+     * @param size  Size of array
+     * @param i Index of element
+     * @param asc Sorting direction
+     * @param <T> Type of elements in array
+     */
     public <T extends Comparable<T>> void heap(ArrayList<T> arr, int size, int i, boolean asc){
         int maks=i, l=2*i+1, r=2*i+2;
         if (l<size && ((asc && arr.get(l).compareTo(arr.get(maks)) > 0) || (!asc && arr.get(l).compareTo(arr.get(maks)) < 0)))
@@ -35,7 +54,10 @@ public class HeapSort implements Sorting{
             heap(arr,size,maks,asc);
         }
     }
-
+    /**
+     * Returns sorting method
+     * @return Sorting method
+     */
     @Override
     public SortingMethodEnum getSortingMethod() {
         return SortingMethodEnum.HEAP;

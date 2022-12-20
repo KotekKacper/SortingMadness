@@ -9,9 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
 import pl.put.poznan.sorter.logic.SortingStrategy;
 
+/**
+ * Controller class that handles requests to sort an array
+ * */
 @RestController
 public class SortingController {
+    /**
+     * Logger for this class
+     */
     private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
+
+    /**
+     * Sorting strategy
+     * @param request Request with array to sort
+     * @return Sorted array
+     * @param <T> Type of array
+     * @throws ExecutionControl.NotImplementedException If sorting method is not implemented
+     */
     public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
         logger.debug("Sort request: " + request);
         SortingMethodEnum strategy = SortingMethodEnum.valueOf(request.algorithm);

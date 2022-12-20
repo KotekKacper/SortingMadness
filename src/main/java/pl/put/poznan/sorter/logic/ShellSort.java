@@ -5,11 +5,21 @@ import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Class that represents a shell sort algorithm
+ */
 @Service
 public class ShellSort implements Sorting{
     // Insertion sort on sublist of every n-th element (e.g. second)
     // Moving elements that are far from where they should be is more effective
+    /**
+     * Sorts an array using shell sort algorithm
+     * @param arr Array to sort
+     * @param asc Sorting direction
+     * @param maxIterations Maximum number of iterations
+     * @param <T> Type of elements in array
+     * @return Sorted array
+     */
     @Override
     public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations) {
         int size = arr.size();
@@ -32,7 +42,10 @@ public class ShellSort implements Sorting{
         }
         return arr;
     }
-
+    /**
+     * Returns sorting method
+     * @return Sorting method
+     */
     @Override
     public SortingMethodEnum getSortingMethod() {
         return SortingMethodEnum.SHELL;

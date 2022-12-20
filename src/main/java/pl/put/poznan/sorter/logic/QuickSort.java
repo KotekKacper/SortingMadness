@@ -5,9 +5,19 @@ import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Class that represents a bubble sort algorithm
+ */
 @Service
 public class QuickSort implements Sorting{
+    /**
+     * Sorts an array using quick sort algorithm
+     * @param arr Array to sort
+     * @param asc Sorting direction
+     * @param maxIterations Maximum number of iterations
+     * @param <T> Type of elements in array
+     * @return Sorted array
+     */
     @Override
     public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations) {
         if (maxIterations <= 0) maxIterations = Integer.MAX_VALUE;
@@ -15,6 +25,15 @@ public class QuickSort implements Sorting{
         return arr;
     }
 
+    /**
+     * Divides array into two parts and sorts them recursively
+     * @param arr Array to sort
+     * @param begin Beginning of array
+     * @param end End of array
+     * @param asc Sorting direction
+     * @param iterations Maximum number of iterations
+     * @param <T> Type of elements in array
+     */
     public <T extends Comparable<T>> void quick(ArrayList<T> arr, int begin, int end, boolean asc, int iterations) {
         if (iterations == 0) return;
         int i = begin, j = end;
@@ -33,6 +52,10 @@ public class QuickSort implements Sorting{
         if (begin < j) quick(arr, begin, j, asc, --iterations);
     }
 
+    /**
+     * Returns sorting method
+     * @return Sorting method
+     */
     @Override
     public SortingMethodEnum getSortingMethod() {
         return SortingMethodEnum.QUICK;
