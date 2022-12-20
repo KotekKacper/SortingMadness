@@ -1,6 +1,7 @@
 package pl.put.poznan.sorter.rest;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SortResponse<T> {
@@ -20,7 +21,13 @@ public class SortResponse<T> {
     public long getExecutionTime(){
         return this.executionTime;
     }
+    public SortResponse(){
 
+    }
+    public <T2> SortResponse(SortResponse<T2> response, Function<T2, T> converter){
+        executionTime = response.executionTime;
+        result = new ArrayList<T>(response.result.stream().map(converter).collect(Collectors.toList()));
+    }
     @Override
     public String toString() {
         return "Time: " + executionTime + ", Array: [" +
