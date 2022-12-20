@@ -16,6 +16,7 @@ public class SortRequest<T> {
     boolean ascending;
     @Value("${comperedKey:}")
     String comperedKey;
+    int maxIterations;
     public void setArray(ArrayList<T> array){
         this.array = array;
     }
@@ -29,9 +30,9 @@ public class SortRequest<T> {
         this.comperedKey = comperedKey;
     }
 
-    public ArrayList<T> getArray(){
-        return this.array;
-    }
+    public void setMaxIterations(int maxIterations) {this.maxIterations = maxIterations;}
+
+    public ArrayList<T> getArray(){ return this.array; }
     public String getAlgorithm(){
         return this.algorithm;
     }
@@ -50,10 +51,11 @@ public class SortRequest<T> {
         comperedKey = request.comperedKey;
         array = new ArrayList<T>(request.array.stream().map(converter).collect(Collectors.toList()));
     }
+    public int getMaxIterations(){ return this.maxIterations; }
 
     @Override
     public String toString() {
-        return "Alghoritm: " + algorithm + (ascending ? " ASC" : " DESC") + ", Array: [" +
+        return "Algorithm: " + algorithm + (ascending ? " ASC" : " DESC") + ", Array: [" +
                 String.join(", ",array.stream().map(e -> e.toString()).collect(Collectors.toList())) +
                 "]";
     }

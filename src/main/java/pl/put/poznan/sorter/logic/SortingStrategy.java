@@ -45,11 +45,11 @@ public class SortingStrategy {
         }
     }
 
-    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc)
+    public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations)
     {
         executionTime = new MyTimer();
         executionTime.go();
-        var result = sorting.sort(arr, asc);
+        var result = sorting.sort(arr, asc, maxIterations);
         executionTime.stop();
         return result;
     }
