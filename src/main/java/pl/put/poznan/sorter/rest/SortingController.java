@@ -1,4 +1,5 @@
 package pl.put.poznan.sorter.rest;
+import com.fasterxml.jackson.databind.JsonNode;
 import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,9 +49,20 @@ public class SortingController {
     }
 
     @PostMapping(value = "/sortFloats", consumes = "application/json", produces = "application/json")
-    public SortResponse<Float> sortFloats(@RequestBody SortRequest<Float> request){
+    public SortResponse<Float> sortFloats(@RequestBody SortRequest<Float> request) {
         try {
             return sort(request);
+        } catch (ExecutionControl.NotImplementedException e) {
+            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //TODO: handle bad request response code
+            return null;
+        }
+    }
+
+    @PostMapping(value = "/sortObjects", consumes = "application/json", produces = "application/json")
+    public SortResponse<JsonNode> sortObjects(@RequestBody SortRequest<JsonNode> request){
+        try {
+            return new SortResponse<JsonNode>(sort(new SortRequest<JSON>(request, o -> new JSON(o, request.comperedKey))), o -> o.node);
         } catch (ExecutionControl.NotImplementedException e) {
             //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             //TODO: handle bad request response code
