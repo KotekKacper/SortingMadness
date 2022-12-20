@@ -4,8 +4,18 @@ import pl.put.poznan.sorter.enums.SortingMethodEnum;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Class that represents a selection sort algorithm
+ */
 public class SelectionSort implements Sorting{
+    /**
+     * Sorts an array using selection sort algorithm
+     * @param arr Array to sort
+     * @param asc Sorting direction
+     * @param maxIterations Maximum number of iterations
+     * @param <T> Type of elements in array
+     * @return Sorted array
+     */
     @Override
     public <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> arr, boolean asc, int maxIterations) {
         int minimum;
@@ -25,6 +35,10 @@ public class SelectionSort implements Sorting{
         return arr;
     }
 
+    /**
+     * Returns sorting method
+     * @return Sorting method
+     */
     @Override
     public SortingMethodEnum getSortingMethod() {return SortingMethodEnum.SELECTION;}
 }
