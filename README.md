@@ -4,6 +4,6 @@ Aplikacja służąca do sortowania zbiorów danych różnymi algorytmami. Ma pom
 
 ## UML
 ### Diagram klas
-![obraz](https://user-images.githubusercontent.com/71709842/208747048-9b3200a3-08d3-451b-9150-1da477274bd5.png)
+![obraz](https://user-images.githubusercontent.com/71709842/208877747-5fc99abf-a89a-43b3-9739-91e71513b06a.png)
 ### Diagram sekwencji dla BubbleSort
 ![obraz](https://user-images.githubusercontent.com/71709842/208747142-b89d6fde-d1c5-45c4-a41f-c4604acbb6eb.png)
