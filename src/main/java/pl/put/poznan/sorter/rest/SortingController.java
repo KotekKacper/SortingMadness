@@ -49,6 +49,7 @@ public class SortingController {
     public ResponseEntity<SortResponse<String>> sortStrings(@RequestBody SortRequest<String> request){
         logger.info("Called endpoint /sortStrings");
         try {
+            if (request.array.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             return ResponseEntity.ok(sort(request));
         } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -58,6 +59,7 @@ public class SortingController {
     @PostMapping(value = "/sortInts", consumes = "application/json", produces = "application/json")
     public ResponseEntity<SortResponse<Integer>> sortInts(@RequestBody SortRequest<Integer> request){
         try {
+            if (request.array.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             return ResponseEntity.ok(sort(request));
         } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -67,6 +69,7 @@ public class SortingController {
     @PostMapping(value = "/sortFloats", consumes = "application/json", produces = "application/json")
     public ResponseEntity<SortResponse<Float>> sortFloats(@RequestBody SortRequest<Float> request) {
         try {
+            if (request.array.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             return ResponseEntity.ok(sort(request));
         } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -76,6 +79,7 @@ public class SortingController {
     @PostMapping(value = "/sortObjects", consumes = "application/json", produces = "application/json")
     public ResponseEntity<SortResponse<JsonNode>> sortObjects(@RequestBody SortRequest<JsonNode> request){
         try {
+            if (request.array.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             return ResponseEntity.ok(
                     new SortResponse<JsonNode>(
                             sort(new SortRequest<JSON>(request, o -> new JSON(o, request.comperedKey))),
