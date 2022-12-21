@@ -65,14 +65,14 @@ public class SortRequest<T> {
     }
 
     /**
-     * Empty constructor
+     * Empty constructor that allows to create an empty object
      */
     public SortRequest(){
 
     }
 
     /**
-     * Constructor
+     * Constructor that allows to create an object with parameters and convert data to proper types
      * @param request Request to sort an array
      * @param converter Function that converts request to array
      * @param <T2> Type of elements in array

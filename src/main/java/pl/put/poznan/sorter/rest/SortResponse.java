@@ -49,14 +49,14 @@ public class SortResponse<T> {
     }
 
     /**
-     * Empty constructor
+     * Empty constructor that allows to create empty response
      */
     public SortResponse(){
 
     }
 
     /**
-     * Constructor with parameters
+     * Constructor with parameters that allows to create response with result and execution times and convert it to a proper type
      * @param response Response from sorting service
      * @param converter Converter from sorting service response to SortResponse
      * @param <T2> Type of elements in sorting service response
