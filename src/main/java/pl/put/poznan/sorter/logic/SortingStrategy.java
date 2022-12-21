@@ -79,7 +79,7 @@ public class SortingStrategy {
     {
         executionTime = new MyTimer();
         executionTime.go();
-        var result = sorting.sort(arr, asc, maxIterations);
+        ArrayList<T> result = sorting.sort(arr, asc, maxIterations);
         executionTime.stop();
         return result;
     }

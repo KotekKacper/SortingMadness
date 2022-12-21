@@ -14,9 +14,10 @@
     <groupId>pl.put.poznan</groupId>
     <artifactId>sorting-madness</artifactId>
     <version>0.2</version>
+    <packaging>jar</packaging>
 
 	<properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
 
     
