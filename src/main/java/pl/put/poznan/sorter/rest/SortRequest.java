@@ -24,7 +24,7 @@ public class SortRequest<T> {
     /**
      * Sorting algorithm
      */
-    String algorithm;
+    ArrayList<String> algorithms;
     /**
      * Sorting direction
      */
@@ -41,8 +41,8 @@ public class SortRequest<T> {
     public void setArray(ArrayList<T> array){
         this.array = array;
     }
-    public void setAlgorithm(String algorithm){
-        this.algorithm = algorithm;
+    public void setAlgorithms(ArrayList<String> algorithms){
+        this.algorithms = algorithms;
     }
     public void setAscending(boolean ascending){
         this.ascending = ascending;
@@ -54,8 +54,8 @@ public class SortRequest<T> {
     public void setMaxIterations(int maxIterations) {this.maxIterations = maxIterations;}
 
     public ArrayList<T> getArray(){ return this.array; }
-    public String getAlgorithm(){
-        return this.algorithm;
+    public ArrayList<String> getAlgorithm(){
+        return this.algorithms;
     }
     public boolean getAscending(){
         return this.ascending;
@@ -78,7 +78,7 @@ public class SortRequest<T> {
      * @param <T2> Type of elements in array
      */
     public <T2> SortRequest(SortRequest<T2> request, Function<T2, T> converter){
-        algorithm = request.algorithm;
+        algorithms = request.algorithms;
         ascending = request.ascending;
         comperedKey = request.comperedKey;
         array = new ArrayList<T>(request.array.stream().map(converter).collect(Collectors.toList()));
@@ -96,10 +96,10 @@ public class SortRequest<T> {
      * Returns string representation of this object
      * @return
      *    String representation of this object
-     *    Format: "algorithm: {algorithm}, ascending: {ascending}, comperedKey: {comperedKey}, array: {array}"
+     *    Format: "Algorithms: {algorithms}, ascending: {ascending}, comperedKey: {comperedKey}, array: {array}"
      */
     public String toString() {
-        return "Algorithm: " + algorithm + (ascending ? " ASC" : " DESC") + ", Array: [" +
+        return "Algorithms: " + String.join(", ", algorithms) + (ascending ? " ASC" : " DESC") + ", Array: [" +
                 String.join(", ",array.stream().map(e -> e.toString()).collect(Collectors.toList())) +
                 "]";
     }
