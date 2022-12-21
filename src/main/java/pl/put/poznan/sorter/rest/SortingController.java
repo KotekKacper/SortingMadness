@@ -4,6 +4,8 @@ import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.sorter.enums.SortingMethodEnum;
@@ -25,8 +27,10 @@ public class SortingController {
      * @return Sorted array
      * @param <T> Type of array
      * @throws ExecutionControl.NotImplementedException If sorting method is not implemented
+     * @throws java.lang.IllegalArgumentException If sorting method is not declared in enum
      */
-    public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
+    public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request)
+            throws ExecutionControl.NotImplementedException, java.lang.IllegalArgumentException {
         logger.debug("Sort request: " + request);
 
         SortResponse<T> result = new SortResponse<T>();
@@ -42,47 +46,44 @@ public class SortingController {
     }
 
     @PostMapping(value = "/sortStrings", consumes = "application/json", produces = "application/json")
-    public SortResponse<String> sortStrings(@RequestBody SortRequest<String> request){
+    public ResponseEntity<SortResponse<String>> sortStrings(@RequestBody SortRequest<String> request){
         logger.info("Called endpoint /sortStrings");
         try {
-            return sort(request);
-        } catch (ExecutionControl.NotImplementedException e) {
-            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            //TODO: handle bad request response code
-            return null;
+            return ResponseEntity.ok(sort(request));
+        } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @PostMapping(value = "/sortInts", consumes = "application/json", produces = "application/json")
-    public SortResponse<Integer> sortInts(@RequestBody SortRequest<Integer> request){
+    public ResponseEntity<SortResponse<Integer>> sortInts(@RequestBody SortRequest<Integer> request){
         try {
-            return sort(request);
-        } catch (ExecutionControl.NotImplementedException e) {
-            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            //TODO: handle bad request response code
-            return null;
+            return ResponseEntity.ok(sort(request));
+        } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @PostMapping(value = "/sortFloats", consumes = "application/json", produces = "application/json")
-    public SortResponse<Float> sortFloats(@RequestBody SortRequest<Float> request) {
+    public ResponseEntity<SortResponse<Float>> sortFloats(@RequestBody SortRequest<Float> request) {
         try {
-            return sort(request);
-        } catch (ExecutionControl.NotImplementedException e) {
-            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            //TODO: handle bad request response code
-            return null;
+            return ResponseEntity.ok(sort(request));
+        } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @PostMapping(value = "/sortObjects", consumes = "application/json", produces = "application/json")
-    public SortResponse<JsonNode> sortObjects(@RequestBody SortRequest<JsonNode> request){
+    public ResponseEntity<SortResponse<JsonNode>> sortObjects(@RequestBody SortRequest<JsonNode> request){
         try {
-            return new SortResponse<JsonNode>(sort(new SortRequest<JSON>(request, o -> new JSON(o, request.comperedKey))), o -> o.node);
-        } catch (ExecutionControl.NotImplementedException e) {
-            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            //TODO: handle bad request response code
-            return null;
+            return ResponseEntity.ok(
+                    new SortResponse<JsonNode>(
+                            sort(new SortRequest<JSON>(request, o -> new JSON(o, request.comperedKey))),
+                            o -> o.node
+                    )
+            );
+        } catch (ExecutionControl.NotImplementedException | java.lang.IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 }
