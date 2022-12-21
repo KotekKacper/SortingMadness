@@ -88,7 +88,7 @@ public class SortingStrategy {
      * @return
      *     Time of last sorting
      */
-    public long getExecutionTime()
+    public long getExecutionTimeMilis()
     {
         return executionTime.getTimeMilli();
     }

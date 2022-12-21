@@ -28,12 +28,15 @@ public class SortingController {
      */
     public <T extends Comparable<T>> SortResponse<T> sort(SortRequest<T> request) throws ExecutionControl.NotImplementedException {
         logger.debug("Sort request: " + request);
-        SortingMethodEnum strategy = SortingMethodEnum.valueOf(request.algorithm);
-        SortingStrategy sorting = new SortingStrategy(strategy);
 
         SortResponse<T> result = new SortResponse<T>();
-        result.result = sorting.sort(request.array, request.ascending, request.maxIterations);
-        result.executionTime = sorting.getExecutionTime();
+        for (String algorithm : request.algorithms){
+            SortingMethodEnum strategy = SortingMethodEnum.valueOf(algorithm);
+            SortingStrategy sorting = new SortingStrategy(strategy);
+            result.result = sorting.sort(request.array, request.ascending, request.maxIterations);
+            result.executionTimes.putIfAbsent(algorithm, sorting.getExecutionTimeMilis());
+        }
+
         logger.debug("Sort result: " + result);
         return result;
     }
