@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BubbleSortTest {
     static Sorting sorting;
@@ -72,19 +74,6 @@ public class BubbleSortTest {
         assertEquals(arr, out_arr, "One float array - descending");
     }
 
-//  TODO - make object for sorting using mock objects
-//    void testOneObjectArray(){
-//        ArrayList arr = new ArrayList();
-//        arr.add();
-//        boolean asc = true;
-//        int maxIterations = 0;
-//
-//        ArrayList out_arr = sorting.sort(arr, asc, maxIterations);
-//        assertEquals(arr, out_arr, "One object array - ascending");
-//
-//        out_arr = sorting.sort(arr, !asc, maxIterations);
-//        assertEquals(arr, out_arr, "One object array - descending");
-//    }
     @Test
     void testStringArray(){
         ArrayList arr = new ArrayList();
@@ -166,19 +155,6 @@ public class BubbleSortTest {
         assertEquals(exp_arr, out_arr, "Float array - descending");
     }
 
-//  TODO - make object for sorting using mock objects
-//    void testObjectArray(){
-//        ArrayList arr = new ArrayList();
-//        arr.add();
-//        boolean asc = true;
-//        int maxIterations = 0;
-//
-//        ArrayList out_arr = sorting.sort(arr, asc, maxIterations);
-//        assertEquals(arr, out_arr, "One object array - ascending");
-//
-//        out_arr = sorting.sort(arr, !asc, maxIterations);
-//        assertEquals(arr, out_arr, "One object array - descending");
-//    }
     @Test
     void testNegativeIntArray(){
         ArrayList arr = new ArrayList();
