@@ -1,11 +1,25 @@
 package pl.put.poznan.sorter.logic;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.jshell.spi.ExecutionControl;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
+import pl.put.poznan.sorter.enums.SortingMethodEnum;
+import pl.put.poznan.sorter.rest.JSON;
+import pl.put.poznan.sorter.rest.SortRequest;
+import pl.put.poznan.sorter.rest.SortResponse;
+import pl.put.poznan.sorter.rest.SortingController;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -316,4 +330,104 @@ public class BubbleSortTest {
         assertEquals(exp_arr, out_arr, "String array with special characters - descending");
     }
 
+    @Test
+    void testEmptyObjectArray() throws ExecutionControl.NotImplementedException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList arr = new ArrayList();
+
+        SortRequest req = new SortRequest();
+        req.setArray(arr);
+        ArrayList algo = new ArrayList();
+        algo.add("BUBBLE");
+        req.setAlgorithms(algo);
+        req.setAscending(true);
+        req.setMaxIterations(0);
+        String comKey = "text";
+        req.setComperedKey(comKey);
+
+        SortingController sc = new SortingController();
+        ResponseEntity res = sc.sortObjects(req);
+        String output = res.toString();
+
+        assertEquals("<400 BAD_REQUEST Bad Request,[]>", output, "Empty object array - ascending");
+    }
+
+    @Test
+    void testOneObjectArray() throws ExecutionControl.NotImplementedException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList arr = new ArrayList();
+        ObjectExample m1 = new ObjectExample("Hello");
+        JsonNode node1 = mapper.valueToTree(m1);
+        arr.add(node1);
+
+        ArrayList exp_arr = new ArrayList();
+        exp_arr.add(node1);
+
+        SortRequest req = new SortRequest();
+        req.setArray(arr);
+        ArrayList algo = new ArrayList();
+        algo.add("BUBBLE");
+        req.setAlgorithms(algo);
+        req.setAscending(true);
+        req.setMaxIterations(0);
+        String comKey = "text";
+        req.setComperedKey(comKey);
+
+        SortingController sc = new SortingController();
+        ResponseEntity res = sc.sortObjects(req);
+        Pattern pattern = Pattern.compile("Array: (\\[.*]),");
+        Matcher matcher = pattern.matcher(res.toString());
+        matcher.find();
+        String output = matcher.group(1);
+
+        assertEquals(exp_arr.toString(), output, "One object array - ascending");
+    }
+
+    @Test
+    void testObjectArray() throws ExecutionControl.NotImplementedException, JsonProcessingException, JSONException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList arr = new ArrayList();
+        ObjectExample m1 = new ObjectExample("b");
+        JsonNode node1 = mapper.valueToTree(m1);
+        arr.add(node1);
+        ObjectExample m2 = new ObjectExample("d");
+        JsonNode node2 = mapper.valueToTree(m2);
+        arr.add(node2);
+        ObjectExample m3 = new ObjectExample("e");
+        JsonNode node3 = mapper.valueToTree(m3);
+        arr.add(node3);
+        ObjectExample m4 = new ObjectExample("a");
+        JsonNode node4 = mapper.valueToTree(m4);
+        arr.add(node4);
+        ObjectExample m5 = new ObjectExample("c");
+        JsonNode node5 = mapper.valueToTree(m5);
+        arr.add(node5);
+
+
+        ArrayList exp_arr = new ArrayList();
+        exp_arr.add(node4);
+        exp_arr.add(node1);
+        exp_arr.add(node5);
+        exp_arr.add(node2);
+        exp_arr.add(node3);
+
+        SortRequest req = new SortRequest();
+        req.setArray(arr);
+        ArrayList algo = new ArrayList();
+        algo.add("BUBBLE");
+        req.setAlgorithms(algo);
+        req.setAscending(true);
+        req.setMaxIterations(0);
+        String comKey = "text";
+        req.setComperedKey(comKey);
+
+        SortingController sc = new SortingController();
+        ResponseEntity res = sc.sortObjects(req);
+        Pattern pattern = Pattern.compile("Array: (\\[.*]),");
+        Matcher matcher = pattern.matcher(res.toString());
+        matcher.find();
+        String output = matcher.group(1);
+
+        assertEquals(exp_arr.toString(), output, "Object array - ascending");
+    }
 }
