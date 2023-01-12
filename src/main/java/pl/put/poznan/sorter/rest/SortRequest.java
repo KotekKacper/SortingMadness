@@ -81,6 +81,7 @@ public class SortRequest<T> {
         algorithms = request.algorithms;
         ascending = request.ascending;
         comperedKey = request.comperedKey;
+        maxIterations = request.maxIterations;
         array = new ArrayList<T>(request.array.stream().map(converter).collect(Collectors.toList()));
     }
 
