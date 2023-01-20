@@ -8,5 +8,6 @@ public enum SortingMethodEnum {
     SHELL,
     QUICK,
     HEAP,
-    SELECTION
+    SELECTION,
+    AUTOMATIC
 }

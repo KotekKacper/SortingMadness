@@ -57,6 +57,9 @@ public class SortingStrategy {
             case SELECTION:
                 sorting = new SelectionSort();
                 break;
+            case AUTOMATIC:
+                sorting = new AutomaticChoice();
+                break;
 
             default:
                 throw new ExecutionControl.NotImplementedException("Following strategy is not implemented");
