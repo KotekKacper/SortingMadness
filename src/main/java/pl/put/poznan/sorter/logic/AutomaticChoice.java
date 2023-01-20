@@ -38,22 +38,22 @@ public class AutomaticChoice implements Sorting{
         logger.info("ascendention: " + pAscendention);
         logger.info("continuity: " + pContiniuity);
         if (pAscendention > 0.5 && pContiniuity > 0.5) {
-            logger.info("BubbleSort");
-            return new BubbleSort().sort(arr, asc, maxIterations);
+            logger.info("HeapSort");
+            return new HeapSort().sort(arr, asc, maxIterations);
         }
         else if (pAscendention > 0.5 && pContiniuity < 0.5) {
-            logger.info("InsertionSort");
-            return new InsertionSort().sort(arr, asc, maxIterations);
+            logger.info("ShellSort");
+            return new ShellSort().sort(arr, asc, maxIterations);
 
         }
         else if (pAscendention < 0.5 && pContiniuity > 0.5) {
-            logger.info("SelectionSort");
-            return new SelectionSort().sort(arr, asc, maxIterations);
+            logger.info("InsertionSort");
+            return new InsertionSort().sort(arr, asc, maxIterations);
         }
 
         else {
-            logger.info("HeapSort");
-            return new HeapSort().sort(arr, asc, maxIterations);
+            logger.info("BubbleSort");
+            return new BubbleSort().sort(arr, asc, maxIterations);
         }
     }
 
